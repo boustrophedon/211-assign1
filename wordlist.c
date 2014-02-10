@@ -19,7 +19,7 @@ int wl_grow(wordlist *wl) {
     char **newarr = realloc(wl->arr, 2*(wl->array_size) * sizeof(char*));
 
     if (newarr == NULL) {
-        printf("Couldn't allocate enough memory."); /* error message shouldn't really be here but whatever. */
+        fprintf(stderr, "Couldn't allocate enough memory.\n"); /* error message shouldn't really be here but whatever. */
         return -1;
     }
     else {
@@ -43,7 +43,8 @@ int wl_append(wordlist *wl, char *word) {
             return wl_append(wl, word);
         }
         else {
-            return -1; /* append failed */
+			fprintf(stderr, "Append failed.\n");
+            return -1;
         }
     }
 }

@@ -5,12 +5,11 @@
 
 #define INITIAL_SIZE 5
 
-typedef struct wl_vector wordlist;
-struct wl_vector {
+typedef struct wl_vector {
     char **arr; /* array of strings */
     size_t array_size; /* internal use only */
     size_t num_elements;
-};
+} wordlist;
 
 wordlist *wl_create();
 int wl_grow(wordlist *wl); /* double size, only call from wl_append */
