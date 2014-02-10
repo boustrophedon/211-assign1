@@ -24,6 +24,7 @@ int wl_grow(wordlist *wl) {
     }
     else {
         wl->arr = newarr;
+		wl->array_size = 2*(wl->array_size);
         return 0;
     }
 }
@@ -65,6 +66,6 @@ int wl_set(wordlist *wl, size_t index, char *word) {
 }
 
 
-int wl_size(wordlist *wl) {
+size_t wl_size(wordlist *wl) {
     return wl->num_elements;
 }

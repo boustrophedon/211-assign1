@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-ansi -pedantic -Wall -Werror
-LDFLAGS=
+CFLAGS=-g -std=c99 -pedantic -Wall -Werror
+LDFLAGS=-g
 
 all: wordcount
 

@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#define INITIAL_SIZE 50
+#define INITIAL_SIZE 5
 
 typedef struct wl_vector wordlist;
 struct wl_vector {
@@ -18,6 +18,6 @@ int wl_append(wordlist *wl, char *word);
 char *wl_get(wordlist *wl, size_t index);
 int wl_set(wordlist *wl, size_t index, char *word); /* I don't think I'll actually need this for this assignment so I am leaving it unimplemented */
 
-int wl_size(wordlist *wl); /* returns number of elements i.e. how far have we advanced in the list, rather than internal size of array */
+size_t wl_size(wordlist *wl); /* returns number of elements i.e. how far have we advanced in the list, rather than internal size of array */
 
 #endif /* WORDLIST_H */
