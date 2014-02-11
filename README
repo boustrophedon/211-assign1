@@ -1,3 +1,3 @@
 The first assignment for Rutgers CS211 Spring 2014. Even a README is really unnecessary because this is not really important enough to even be on github. I am just using it to sync between my laptop and my desktop because I am too lazy to set up my own git server. 
 
-For this assignment we have to keep track of the number of distinct words appearing in a file, both considering capitalization and also the distinct capitalized forms.
+For this assignment we have to keep track of the number of distinct words appearing in a file, both without considering capitalization and also the distinct capitalized forms.
