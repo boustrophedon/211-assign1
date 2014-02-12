@@ -63,6 +63,8 @@ int main(int argc, char *argv[]) {
 
 	parse_words(text, wl);
 
+	wl_sort(wl);
+
 	for (int i = 0; i < wl_size(wl); i++) {
 		printf("%s\n", wl_get(wl, i));
 	}

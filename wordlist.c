@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "wordlist.h"
+#include "wc_util.h"
 
 wordlist *wl_create() {
     wordlist *new_wl = malloc(sizeof(wordlist));
@@ -66,6 +67,9 @@ int wl_set(wordlist *wl, size_t index, char *word) {
 
 }
 
+void wl_sort(wordlist *wl) {
+	qsort(wl->arr, wl_size(wl), sizeof(char*), &compare_strings_lower);
+}
 
 size_t wl_size(wordlist *wl) {
     return wl->num_elements;

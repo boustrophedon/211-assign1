@@ -37,7 +37,9 @@ char* read_file(char fname[]) {
 
 }
 
-/* I realized since there are literally functions isalnum and isalpha these aren't necessary. oh well */
+
+
+/* I realized since there are literally functions isalnum and isalpha these aren't necessary. oh well. readability. */
 int inword(char c) {
     if (isalnum(c)) {
         return 1;
@@ -66,3 +68,23 @@ char *make_word(char *text, size_t first, size_t last) {
 
     return word;
 }
+
+
+
+char *lowercase(char *source) {
+	size_t len = strlen(source);
+	char *dest = malloc(len * sizeof(char));
+
+	for (int i = 0; i < len; i++) {
+		dest[i] = tolower(source[i]);
+	}
+	return dest;
+}
+
+int compare_strings_lower(const void *a, const void *b) {
+	char *astr = *(char **)a;
+	char *bstr = *(char **)b;
+
+	return strcmp(lowercase(astr), lowercase(bstr));
+}
+
