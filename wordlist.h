@@ -11,7 +11,7 @@ typedef struct wl_vector {
     size_t num_elements;
 } wordlist;
 
-wordlist *wl_create();
+wordlist *wl_create(void);
 int wl_grow(wordlist *wl); /* double size, only call from wl_append */
 int wl_append(wordlist *wl, char *word);
 char *wl_get(wordlist *wl, size_t index);

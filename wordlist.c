@@ -61,12 +61,6 @@ char *wl_get(wordlist *wl, size_t index) {
 
 }
 
-int wl_set(wordlist *wl, size_t index, char *word) {
-    /* STUBBED until needed */
-    return 0;
-
-}
-
 void wl_sort(wordlist *wl) {
 	qsort(wl->arr, wl_size(wl), sizeof(char*), &compare_strings_lower);
 }

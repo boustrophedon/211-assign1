@@ -1,19 +1,19 @@
 CC=clang
-CFLAGS=-g -std=c99 -pedantic -Wall -Werror
+CFLAGS=-g -std=c99 -pedantic -Wall -Werror -Weverything
 LDFLAGS=-g
 
 all: wordstat
 
-wordstat: wordcount.o wordlist.o wc_util.o
-		$(CC) $(LDFLAGS) wordcount.o wordlist.o wc_util.o -o wordstat
+wordstat: wordstat.o wordlist.o wc_util.o
+		$(CC) $(LDFLAGS) wordstat.o wordlist.o wc_util.o -o wordstat
 
-wordcount.o: wordcount.c wordcount.h wordlist.h wc_util.h
-		$(CC) $(CFLAGS) -c wordcount.c
+wordstat.o: wordstat.c 
+		$(CC) $(CFLAGS) -c wordstat.c
 
-wordlist.o: wordlist.c wordlist.h
+wordlist.o: wordlist.c
 		$(CC) $(CFLAGS) -c wordlist.c
 
-wc_util.o: wc_util.c wc_util.h
+wc_util.o: wc_util.c
 		$(CC) $(CFLAGS) -c wc_util.c
 
 

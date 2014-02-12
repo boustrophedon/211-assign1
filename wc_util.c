@@ -3,12 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 
-char* read_file(char fname[]) {
-	FILE* fd;
-	size_t fsize;
-	char* fstring;
+#include "wc_util.h"
 
-	fd = fopen(fname, "r");
+char* read_file(char fname[]) {
+	FILE* fd = fopen(fname, "r");
 
 	if (fd==NULL) {
 		fprintf(stderr, "Couldn't open file.\n");
@@ -20,11 +18,11 @@ char* read_file(char fname[]) {
 		return NULL;
 	}
 
-	fsize = ftell(fd);
+	size_t fsize = (size_t)ftell(fd);
 
 	fseek(fd, 0, SEEK_SET);
 
-	fstring = malloc(sizeof(char)*fsize);
+	char *fstring = malloc(sizeof(char)*fsize);
 	if (fstring == NULL) {
 		fprintf(stderr, "Couldn't allocate memory for string.\n");
 		return NULL;
@@ -60,7 +58,7 @@ int inword_first(char c) {
 }
 
 char *make_word(char *text, size_t first, size_t last) {
-    int length = last-first+1;
+    size_t length = last-first+1;
 
     char *word = malloc( (length+1) * sizeof(char));
     strncpy(word, &(text[first]), length);
@@ -75,8 +73,8 @@ char *lowercase(char *source) {
 	size_t len = strlen(source);
 	char *dest = malloc(len * sizeof(char));
 
-	for (int i = 0; i < len; i++) {
-		dest[i] = tolower(source[i]);
+	for (size_t i = 0; i < len; i++) {
+		dest[i] = (char)tolower(source[i]);
 	}
 	return dest;
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "wordstat.h"
 #include "wordlist.h"
 #include "wc_util.h"
 
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]) {
 	wordlist *wl = wl_create();
 
 	char *arg1 = argv[1];
-	if ((arg1 == NULL) || (strcmp(arg1, "-h") == 0)) {
+	if ((argc == 1) || (strcmp(arg1, "-h") == 0)) {
 		printf("help text goes here\n");
 		return 0;
 	}
@@ -65,7 +66,7 @@ int main(int argc, char *argv[]) {
 
 	wl_sort(wl);
 
-	for (int i = 0; i < wl_size(wl); i++) {
+	for (size_t i = 0; i < wl_size(wl); i++) {
 		printf("%s\n", wl_get(wl, i));
 	}
 
