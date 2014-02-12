@@ -5,9 +5,49 @@
 #include "wordlist.h"
 #include "wc_util.h"
 
+#define IN 1
+#define OUT 0
+
+
+void parse_words(char *text, wordlist *wl) {
+	int state = OUT;
+
+	size_t pos = 0;
+	size_t first = pos;
+	size_t last = pos;
+
+	char cur = text[0];
+
+	while (cur != '\0') {
+		if (state == OUT) {
+			if (inword_first(cur)) {
+				state = IN;
+				first = pos;
+				last = pos;
+			}
+		}
+		else { /* state == IN */
+			if (inword(cur)) {
+				last++;
+			}
+			else {
+				wl_append(wl, make_word(text, first, last));
+				state = OUT;
+			}
+		}
+
+		pos++;
+		cur = text[pos];
+	}
+
+	/* make one more string depending on whether cur == '\0' and we were in a word when we got there */
+	if ((cur == '\0') && (state == IN)) {
+		wl_append(wl, make_word(text, first, last));
+	}
+}
+
 int main(int argc, char *argv[]) {
 	wordlist *wl = wl_create();
-	printf("%zd\n", wl_size(wl));
 
 	char *arg1 = argv[1];
 	if ((arg1 == NULL) || (strcmp(arg1, "-h") == 0)) {
@@ -18,6 +58,13 @@ int main(int argc, char *argv[]) {
 	char *text = read_file(arg1);
 	if (text == NULL) {
 		fprintf(stderr, "Exiting.\n");
+		return -1;
+	}
+
+	parse_words(text, wl);
+
+	for (int i = 0; i < wl_size(wl); i++) {
+		printf("%s\n", wl_get(wl, i));
 	}
 
     return 0;

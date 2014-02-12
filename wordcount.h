@@ -1,7 +1,9 @@
 #ifndef WORDCOUNT_H
 #define WORDCOUNT_H
 
-char *get_next_word(char* text); /* XXX should think about this more */
+#include <stdlib.h>
+#include "wordlist.h"
 
+void parse_words(char *text, wordlist *wl);
 
 #endif
