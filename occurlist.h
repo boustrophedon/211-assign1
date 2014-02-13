@@ -22,6 +22,8 @@ typedef struct occurrences {
 
 occurlist *ol_create(wordlist *wl);
 void ol_delete(occurlist *ol);
+wordoccur *ol_add_word(occurlist *ol, char *word);
+wordoccur *ol_add_cur_word(occurlist *ol, wordoccur *cur_wo, char *word);
 void ol_add_words(occurlist *ol, wordlist *wl);
 wordoccur *ol_get(occurlist *ol, size_t index);
 void ol_print(occurlist *ol);

@@ -29,29 +29,31 @@ void ol_delete(occurlist *ol) {
 	free(ol);
 }
 
+wordoccur *ol_add_word(occurlist *ol, char *word) {
+	wordoccur *cur_wo = wo_create(word);
+	(ol->wo_arr)[ol->size] = cur_wo;
+	ol->size += 1;
+
+	return cur_wo;
+}
+
+wordoccur *ol_add_cur_word(occurlist *ol, wordoccur *cur_wo, char *word) {
+	if (strcmp_case_insensitive(cur_wo->lower, word) == 0) {
+		wo_update(cur_wo, word);
+	}
+	else {
+		cur_wo = ol_add_word(ol, word);
+	}
+	return cur_wo;
+}
+
 void ol_add_words(occurlist *ol, wordlist *wl) {
-	wordoccur *cur_wo = NULL;
+	char *word = wl_get(wl, 0);
+	wordoccur *cur_wo = ol_add_word(ol, word);
 
-	int state = NEW;
-
-	/* i feel like this loop is a bit too complicated */
 	for (size_t i = 1; i < wl_size(wl); i++) {
-		char *word = wl_get(wl, i);
-		if (state == OLD) {
-			if (strcmp_case_insensitive(word, cur_wo->lower) != 0) {
-				state = NEW;
-			}
-			else {
-				wo_update(cur_wo, word);
-			}
-		}
-		if (state == NEW) {
-			cur_wo = wo_create(word);
-			(ol->wo_arr)[ol->size] = cur_wo;
-			ol->size += 1;
-
-			state = OLD;
-		}
+		word = wl_get(wl, i);
+		cur_wo = ol_add_cur_word(ol, cur_wo, word);
 	}
 }
 
@@ -97,13 +99,17 @@ void wo_delete(wordoccur *wo) {
 
 void wo_update(wordoccur *wo, char *word) {
 	wo->total += 1;
+
+	int isnew = NEW;
 	for (size_t i = 0; i<(wo->uniq); i++) {
 		char *cur = wo_get(wo, i);
-		if (strcmp(word, cur) != 0) {
-			wl_append(wo->words, strdup(word));
-			wo->uniq += 1;
-			return;
+		if (strcmp(word, cur) == 0) {
+			isnew = OLD;
 		}
+	}
+	if (isnew == NEW) {
+		wl_append(wo->words, strdup(word));
+		wo->uniq += 1;
 	}
 }
 
