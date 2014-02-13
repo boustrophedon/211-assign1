@@ -22,7 +22,7 @@ char* read_file(char fname[]) {
 	rewind(fd);
 	
 
-	char *fstring = malloc(sizeof(char)*(fsize));
+	char *fstring = malloc(sizeof(char)*(fsize+1));
 	if (fstring == NULL) {
 		fprintf(stderr, "Couldn't allocate memory for string.\n");
 		return NULL;
@@ -30,6 +30,8 @@ char* read_file(char fname[]) {
 
 	fread(fstring, 1, fsize, fd);	
 	fclose(fd);
+
+	fstring[fsize] = '\0';
 
 	return fstring;
 
