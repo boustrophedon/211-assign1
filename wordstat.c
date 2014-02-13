@@ -53,7 +53,12 @@ int main(int argc, char *argv[]) {
 
 	char *arg1 = argv[1];
 	if ((argc == 1) || (strcmp(arg1, "-h") == 0)) {
-		printf("help text goes here\n");
+		printf("Wordstat counts the number of words in a file, both case-sensitively and the total number of case-insensitive occurrences.\n");
+		printf("\n");
+		printf("Usage:\n");
+		printf("wordstat [-h]\n");
+		printf("wordstat [file]\n");printf("\n");
+		printf("Running wordstat without input or with -h prints this help text.\n");
 		return 0;
 	}
 	
@@ -71,11 +76,6 @@ int main(int argc, char *argv[]) {
 	parse_words(text, wl);
 
 	wl_sort(wl);
-
-	for (size_t i = 0; i < wl_size(wl); i++) {
-		printf("%s\n", wl_get(wl, i));
-	}
-
 
 	occurlist *ol = ol_create(wl);
 
