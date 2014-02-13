@@ -63,6 +63,11 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
+	if (text[0] == '\0') {
+		printf("Nothing to do. Exiting.\n");
+		return 0;
+	}
+
 	parse_words(text, wl);
 
 	wl_sort(wl);
