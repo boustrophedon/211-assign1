@@ -70,5 +70,9 @@ int main(int argc, char *argv[]) {
 		printf("%s\n", wl_get(wl, i));
 	}
 
+	/* cleanup */
+	wl_delete(wl);
+	free(text);
+	
     return 0;
 }

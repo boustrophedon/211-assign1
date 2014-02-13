@@ -83,6 +83,13 @@ int compare_strings_lower(const void *a, const void *b) {
 	char *astr = *(char **)a;
 	char *bstr = *(char **)b;
 
-	return strcmp(lowercase(astr), lowercase(bstr));
+	char *a_low = lowercase(astr);
+	char *b_low = lowercase(bstr);
+
+	int ret = strcmp(a_low, b_low);
+
+	free(a_low); free(b_low);
+
+	return ret;
 }
 

@@ -15,6 +15,14 @@ wordlist *wl_create() {
     return new_wl;
 }
 
+void wl_delete(wordlist *wl) {
+	for (size_t i = 0; i < wl_size(wl); i++) {
+		free(wl_get(wl, i));
+	}
+	free(wl->arr);
+	free(wl);
+}
+
 /* returns 0 if grow succeeds, -1 if fails to allocate new memory */
 int wl_grow(wordlist *wl) {
     char **newarr = realloc(wl->arr, 2*(wl->array_size) * sizeof(char*));
