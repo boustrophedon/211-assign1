@@ -71,11 +71,12 @@ char *make_word(char *text, size_t first, size_t last) {
 
 char *lowercase(char *source) {
 	size_t len = strlen(source);
-	char *dest = malloc(len * sizeof(char));
+	char *dest = malloc((len+1) * sizeof(char));
 
 	for (size_t i = 0; i < len; i++) {
 		dest[i] = (char)tolower(source[i]);
 	}
+	dest[len] = '\0';
 	return dest;
 }
 
