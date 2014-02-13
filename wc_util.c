@@ -67,7 +67,14 @@ char *make_word(char *text, size_t first, size_t last) {
     return word;
 }
 
+char *strdup(char *source) {
+	size_t len = strlen(source);
+	char *dest = malloc((len+1) * sizeof(char));
 
+	memcpy(dest, source, len+1);
+
+	return dest;
+}
 
 char *lowercase(char *source) {
 	size_t len = strlen(source);

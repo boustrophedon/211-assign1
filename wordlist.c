@@ -12,12 +12,17 @@ wordlist *wl_create() {
 
     new_wl->arr = malloc(new_wl->array_size * sizeof(char*));
 
+	for (size_t i = 0; i < new_wl->array_size; i++) {
+		(new_wl->arr)[i] = NULL;
+	}
+
     return new_wl;
 }
 
 void wl_delete(wordlist *wl) {
 	for (size_t i = 0; i < wl_size(wl); i++) {
-		free(wl_get(wl, i));
+		char* w = wl_get(wl,i);
+		free(w);
 	}
 	free(wl->arr);
 	free(wl);
@@ -33,6 +38,9 @@ int wl_grow(wordlist *wl) {
     }
     else {
         wl->arr = newarr;
+		for (size_t i = wl->array_size; i < 2*wl->array_size; i++) {
+			(wl->arr)[i] = NULL;
+		}
 		wl->array_size = 2*(wl->array_size);
         return 0;
     }

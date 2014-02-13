@@ -12,6 +12,10 @@ occurlist *ol_create(wordlist *wl) {
 	new_ol->wo_arr = malloc(wl_size(wl) * sizeof(wordoccur*));
 	new_ol->size = 0;
 
+	for (size_t i = 0; i < wl_size(wl); i++ ){
+		(new_ol->wo_arr)[i] = NULL;
+	}
+
 	ol_add_words(new_ol, wl);
 
 	return new_ol;
@@ -72,7 +76,10 @@ wordoccur *wo_create(char *word) {
 	wordoccur *new_wo = malloc(sizeof(wordoccur));
 
 	new_wo->words = wl_create();
-	wl_append(new_wo->words, word);
+	/* make a duplicate so that when we free word from the original wl
+	 * we don't also free the word in our ol/wo
+	 */
+	wl_append(new_wo->words, strdup(word));
 
 	new_wo->lower = lowercase(word);
 
@@ -93,7 +100,7 @@ void wo_update(wordoccur *wo, char *word) {
 	for (size_t i = 0; i<(wo->uniq); i++) {
 		char *cur = wo_get(wo, i);
 		if (strcmp(word, cur) != 0) {
-			wl_append(wo->words, word);
+			wl_append(wo->words, strdup(word));
 			wo->uniq += 1;
 			return;
 		}
