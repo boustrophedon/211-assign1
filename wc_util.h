@@ -11,6 +11,7 @@ int inword_first(char c);
 char *make_word(char *text, size_t first, size_t last);
 
 char *lowercase(char *source);
+int strcmp_case_insensitive(char *a, char *b);
 int compare_strings_lower(const void *a, const void *b);
 
 #endif

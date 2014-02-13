@@ -4,13 +4,14 @@
 
 #include "wordstat.h"
 #include "wordlist.h"
+#include "occurlist.h"
 #include "wc_util.h"
 
 #define IN 1
 #define OUT 0
 
-
-void parse_words(char *text, wordlist *wl) {
+/* this essentially does part of processStr from the problem description pdf */
+void parse_words(char *text, wordlist *wl) { 
 	int state = OUT;
 
 	size_t pos = 0;
@@ -70,8 +71,14 @@ int main(int argc, char *argv[]) {
 		printf("%s\n", wl_get(wl, i));
 	}
 
+
+	occurlist *ol = ol_create(wl);
+
+	ol_print(ol); /* printResult in the pdf */
+
 	/* cleanup */
 	wl_delete(wl);
+	ol_delete(ol);
 	free(text);
 	
     return 0;

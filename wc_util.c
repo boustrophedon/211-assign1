@@ -19,10 +19,10 @@ char* read_file(char fname[]) {
 	}
 
 	size_t fsize = (size_t)ftell(fd);
+	rewind(fd);
+	
 
-	fseek(fd, 0, SEEK_SET);
-
-	char *fstring = malloc(sizeof(char)*fsize);
+	char *fstring = malloc(sizeof(char)*(fsize));
 	if (fstring == NULL) {
 		fprintf(stderr, "Couldn't allocate memory for string.\n");
 		return NULL;
@@ -79,6 +79,18 @@ char *lowercase(char *source) {
 	return dest;
 }
 
+int strcmp_case_insensitive(char *a, char *b) {
+	char *a_low = lowercase(a);
+	char *b_low = lowercase(b);
+
+	int ret = strcmp(a_low, b_low);
+
+	free(a_low);free(b_low);
+
+	return ret;
+}
+
+/* only for use with qsort */
 int compare_strings_lower(const void *a, const void *b) {
 	char *astr = *(char **)a;
 	char *bstr = *(char **)b;
