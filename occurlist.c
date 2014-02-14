@@ -81,7 +81,7 @@ wordoccur *wo_create(char *word) {
 	/* make a duplicate so that when we free word from the original wl
 	 * we don't also free the word in our ol/wo
 	 */
-	wl_append(new_wo->words, strdup(word));
+	wl_append(new_wo->words, str_dup(word));
 
 	new_wo->lower = lowercase(word);
 
@@ -108,7 +108,7 @@ void wo_update(wordoccur *wo, char *word) {
 		}
 	}
 	if (isnew == NEW) {
-		wl_append(wo->words, strdup(word));
+		wl_append(wo->words, str_dup(word));
 		wo->uniq += 1;
 	}
 }

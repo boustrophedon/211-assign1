@@ -69,7 +69,7 @@ char *make_word(char *text, size_t first, size_t last) {
     return word;
 }
 
-char *strdup(char *source) {
+char *str_dup(char *source) {
 	size_t len = strlen(source);
 	char *dest = malloc((len+1) * sizeof(char));
 
